@@ -6,15 +6,24 @@ import Spinner from "./Spinner";
 import ErrorBoundary from "../ErrorBoundary";
 
 export default function Cards({ fetchUrl, headline }) {
-  const { loading, movies, getMovies } = useGlobalContext();
+  const { loading, movies, getMovies, hasError, setHasError } =
+    useGlobalContext();
 
   useEffect(() => {
     let timerOut = setTimeout(() => {
-      getMovies(fetchUrl);
+      try {
+        getMovies(fetchUrl);
+      } catch (error) {
+        setHasError({ status: true, mgs: error.message });
+      }
     }, 1000);
     return () => clearTimeout(timerOut);
   }, [fetchUrl]);
 
+  if (hasError.status) {
+    return <h1>{hasError.mgs}</h1>;
+    console.info(hasError.mgs);
+  }
   return (
     <>
       {loading ? (

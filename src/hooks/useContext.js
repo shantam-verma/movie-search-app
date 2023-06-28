@@ -7,6 +7,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const [hasError, setHasError] = useState({ status: false, msg: "" });
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
@@ -19,9 +20,13 @@ export const AppProvider = ({ children }) => {
       if (response.data.results) {
         setMovies(response.data.results);
         setProgress(70);
+      } else {
+        console.info(response.error);
+        setHasError({ status: true, msg: response.error.message });
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      setHasError({ status: true, msg: error.message });
     } finally {
       setLoading(false);
       setProgress(100);
@@ -41,11 +46,13 @@ export const AppProvider = ({ children }) => {
         value={{
           search,
           setSearch,
+          movies,
+          getMovies,
+          hasError,
+          setHasError,
           loading,
           setLoading,
           setProgress,
-          movies,
-          getMovies,
         }}
       >
         {children}
