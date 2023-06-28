@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import ErrorBoundary from "./ErrorBoundary";
+import { UserAuthContextProvider } from "./hooks/useAuthContext";
+import { AppProvider } from "./hooks/useContext";
+import Router from "./lib/Router";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <UserAuthContextProvider>
+        <AppProvider>
+          <Router />
+        </AppProvider>
+      </UserAuthContextProvider>
+    </ErrorBoundary>
   );
 }
 
