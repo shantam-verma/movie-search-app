@@ -5,8 +5,11 @@ import { useGlobalContext } from "../hooks/useContext";
 
 export default function NavBar() {
   const { search, setSearch } = useGlobalContext();
+  const [searchLocal, setSearchLocal] = useState('')
+
   const { user, logout } = useGlobalAuth();
   const navigate = useNavigate();
+
   const handleLogin = () => {
     navigate("/login");
   };
@@ -18,8 +21,7 @@ export default function NavBar() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    setSearch(search);
-    console.info(search);
+    setSearch(searchLocal);
     navigate("/search/movie");
   };
 
@@ -95,8 +97,8 @@ export default function NavBar() {
               </ul>
               <form className="d-flex mt-3" role="search">
                 <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  value={searchLocal}
+                  onChange={(e) => {setSearchLocal(e.target.value)}}
                   className="form-control me-2"
                   type="search"
                   placeholder="i.e. Jurassic Park"

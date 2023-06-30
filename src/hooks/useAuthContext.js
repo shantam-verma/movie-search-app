@@ -39,6 +39,7 @@ export const UserAuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      localStorage.setItem("isUserLoggedIn", true)
     });
     return () => {
       unsubscribe();

@@ -9,6 +9,8 @@ export default function Cards({ fetchUrl, headline }) {
   const { loading, movies, getMovies, hasError, setHasError } =
     useGlobalContext();
 
+    console.info("fetch url: ", fetchUrl)
+
   useEffect(() => {
     let timerOut = setTimeout(() => {
       try {

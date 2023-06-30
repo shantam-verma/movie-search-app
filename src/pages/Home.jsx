@@ -5,7 +5,7 @@ import Carousel from "../components/Carousel";
 import Cards from "../components/Cards";
 import useApiURL from "../config/useApiURL";
 
-export default function Home() {
+export default function Home(props) {
   const { fetchTopMovies, fetchTopRated } = useApiURL();
   return (
     <ProtectedRoute>

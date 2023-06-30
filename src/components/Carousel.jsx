@@ -4,10 +4,12 @@ import { useGlobalContext } from "../hooks/useContext";
 const IMG_URL = "https://image.tmdb.org/t/p/original";
 
 export default function Carousel({ fetchUrl }) {
-  const { movies, getMovies } = useGlobalContext();
+  const { carouselData, getMovies } = useGlobalContext();
 
+
+  console.info({carouselData})
   useEffect(() => {
-    getMovies(fetchUrl);
+    getMovies(fetchUrl, true);
   }, [fetchUrl]);
 
   return (
@@ -18,7 +20,7 @@ export default function Carousel({ fetchUrl }) {
       data-bs-wrap="true"
     >
       <div className="carousel-inner">
-        {movies.map((movie, index) => (
+        {carouselData?.map((movie, index) => (
           <div
             className={`carousel-item${index === 0 ? " active" : ""}`}
             data-bs-interval="2000"

@@ -6,6 +6,8 @@ export const IMG_URL = "https://image.tmdb.org/t/p/original";
 export default function useApiURL() {
   const { id } = useParams();
   const { search } = useGlobalContext();
+
+  console.info("search: ", search)
   const movieName = encodeURIComponent(search);
 
   const API_KEY = `?api_key=${process.env.REACT_APP_TMDB_KEY}`;
