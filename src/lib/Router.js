@@ -6,6 +6,7 @@ import Cards from "../components/Cards";
 import useApiURL from "../config/useApiURL";
 import Home from "../pages/Home";
 import AboutMovie from "../pages/AboutMovie";
+import SeriesElement from "../components/SeriesElement";
 
 export default function Router() {
   const {
@@ -39,7 +40,7 @@ export default function Router() {
       element: (
         <>
           <NavBar />
-          <Cards headline="Max Entertainment TV" fetchUrl={fetchTv} />
+          <SeriesElement headline="Max Entertainment TV" fetchUrl={fetchTv} />
         </>
       ),
     },
@@ -59,7 +60,10 @@ export default function Router() {
       element: (
         <>
           <NavBar />
-          <Cards headline="The complete series" fetchUrl={fetchSeries} />
+          <SeriesElement
+            headline="The complete series"
+            fetchUrl={fetchSeries}
+          />
         </>
       ),
     },

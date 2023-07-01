@@ -5,7 +5,7 @@ import { useGlobalContext } from "../hooks/useContext";
 
 export default function NavBar() {
   const { search, setSearch } = useGlobalContext();
-  const [searchLocal, setSearchLocal] = useState('')
+  const [searchLocal, setSearchLocal] = useState("");
 
   const { user, logout } = useGlobalAuth();
   const navigate = useNavigate();
@@ -15,7 +15,10 @@ export default function NavBar() {
   };
   const handleLogout = async () => {
     await logout()
-      .then(() => navigate("/login"))
+      .then(() => {
+        localStorage.removeItem("isUserLoggedIn", false);
+        navigate("/login");
+      })
       .catch((err) => console.log(err));
   };
 
@@ -41,7 +44,7 @@ export default function NavBar() {
         <div className="container-fluid">
           <div className="navbar-brand"></div>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler bg-black"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasDarkNavbar"
@@ -98,7 +101,9 @@ export default function NavBar() {
               <form className="d-flex mt-3" role="search">
                 <input
                   value={searchLocal}
-                  onChange={(e) => {setSearchLocal(e.target.value)}}
+                  onChange={(e) => {
+                    setSearchLocal(e.target.value);
+                  }}
                   className="form-control me-2"
                   type="search"
                   placeholder="i.e. Jurassic Park"

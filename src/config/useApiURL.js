@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useContext";
+import { useParams } from "react-router-dom";
 
 export const IMG_URL = "https://image.tmdb.org/t/p/original";
 
@@ -7,7 +7,7 @@ export default function useApiURL() {
   const { id } = useParams();
   const { search } = useGlobalContext();
 
-  console.info("search: ", search)
+  console.info("search: ", search);
   const movieName = encodeURIComponent(search);
 
   const API_KEY = `?api_key=${process.env.REACT_APP_TMDB_KEY}`;
@@ -33,5 +33,6 @@ export default function useApiURL() {
     fetchSingleMovie,
     fetchTopMovies,
     fetchTv,
+    id,
   };
 }

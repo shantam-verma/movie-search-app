@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  background-color: #050811 !important;
+}
 body {
   font-family: "Lato", sans-serif;
   font-weight: 300;
@@ -10,6 +13,7 @@ body {
   /* line-height: 1.7; */
   letter-spacing: 0.5px;
   background-color: #050811;
+  color: #fff;
 }
 .offcanvas {
   visibility: visible !important;
@@ -181,7 +185,7 @@ body {
 }
 .carousel-image {
   width: 100%;
-  height: 93vh !important;
+  height: 90vh !important;
 }
 
 .img-gradient {
@@ -203,7 +207,7 @@ body {
 .section-header {
   border-left: 10px solid;
   font-family: "Oswald", sans-serif;
-  line-height: 0.8;
+  line-height: 1;
   font-style: normal;
   font-size: 2.8rem;
   font-weight: 400;

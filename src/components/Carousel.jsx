@@ -6,10 +6,9 @@ const IMG_URL = "https://image.tmdb.org/t/p/original";
 export default function Carousel({ fetchUrl }) {
   const { carouselData, getMovies } = useGlobalContext();
 
-
-  console.info({carouselData})
+  console.info({ carouselData });
   useEffect(() => {
-    getMovies(fetchUrl, true);
+    getMovies(fetchUrl, true, false);
   }, [fetchUrl]);
 
   return (

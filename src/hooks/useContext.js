@@ -6,21 +6,29 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [carouselData, setCarouselData] = useState([]);
+  const [seriesData, setSeriesData] = useState([]);
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [hasError, setHasError] = useState({ status: false, msg: "" });
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  const getMovies = async (fetchUrl, isCarouselRequest = false) => {
-    console.info('getMovies')
+  const getMovies = async (
+    fetchUrl,
+    isCarouselRequest = false,
+    isSeriesPage = false
+  ) => {
+    console.info("getMovies");
     setProgress(10);
     setLoading(true);
     try {
       const response = await domainInstance.get(fetchUrl);
       setProgress(40);
       if (isCarouselRequest && response.data.results) {
-        setCarouselData(response.data.results)
+        setCarouselData(response.data.results);
+        setProgress(70);
+      } else if (isSeriesPage && response.data.results) {
+        setSeriesData(response.data.results);
         setProgress(70);
       } else if (response.data.results) {
         setMovies(response.data.results);
@@ -59,6 +67,7 @@ export const AppProvider = ({ children }) => {
           loading,
           setLoading,
           setProgress,
+          seriesData,
         }}
       >
         {children}
