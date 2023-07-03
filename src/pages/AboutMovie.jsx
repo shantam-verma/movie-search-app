@@ -4,12 +4,9 @@ import { IMG_URL } from "../config/useApiURL";
 import defaultImage from "../assets/default_poster.jpg";
 import AboutContent from "../components/AboutContent";
 
-export default function AboutMovie({ fetchUrl }) {
-  const { movies, getMovies } = useGlobalContext();
+export default function AboutMovie() {
+  const { selectedMovie } = useGlobalContext();
 
-  useEffect(() => {
-    getMovies(fetchUrl);
-  }, [fetchUrl]);
 
   const revenueFormatted = Intl.NumberFormat("en-US");
   return (
@@ -18,8 +15,8 @@ export default function AboutMovie({ fetchUrl }) {
         <div className="card text-bg-dark about-backdrop ">
           <img
             src={
-              movies?.poster_path
-                ? `${IMG_URL}${movies?.backdrop_path}`
+              selectedMovie?.poster_path
+                ? `${IMG_URL}${selectedMovie?.backdrop_path}`
                 : defaultImage
             }
             className="card-img single_poster"
@@ -30,10 +27,10 @@ export default function AboutMovie({ fetchUrl }) {
               className="card-title header-title"
               style={{ fontWeight: "400" }}
             >
-              {movies?.original_title}
+              {selectedMovie?.original_title}
             </h5>
             <p className="card-text">
-              {movies?.vote_average}
+              {selectedMovie?.vote_average}
               <i className="fa-solid fa-star"></i>
             </p>
             <button type="button" className="btn btn-info btn-mg">
@@ -50,36 +47,36 @@ export default function AboutMovie({ fetchUrl }) {
       <div className="row featurette">
         <div className="col-md-7 order-md-2">
           <h2 className="card-title text-light featurette-heading lh-1">
-            {movies?.original_title}
+            {selectedMovie?.original_title}
           </h2>
-          <p className="text-light my-3">{movies?.tagline}</p>
+          <p className="text-light my-3">{selectedMovie?.tagline}</p>
           <div className="card-bomoviesdy">
-            <AboutContent lable="Description" content={movies?.overview} />
+            <AboutContent lable="Description" content={selectedMovie?.overview} />
             <AboutContent
               lable="Genre"
               content={
-                movies?.genres &&
-                movies.genres.map((genre) => (
+                selectedMovie?.genres &&
+                selectedMovie.genres.map((genre) => (
                   <span key={genre?.id}>{genre?.name} </span>
                 ))
               }
             />
             <AboutContent
               lable="Released Date"
-              content={`${movies?.release_date} ${movies?.production_countries[0]?.iso_3166_1}`}
+              // content={`${selectedMovie?.release_date} ${selectedMovie?.production_countries[0]?.iso_3166_1}`}
             />
             <AboutContent
               lable="Revenue Earned"
-              content={`$ ${revenueFormatted.format(movies?.revenue)}`}
+              content={`$ ${revenueFormatted.format(selectedMovie?.revenue)}`}
             />
-            <AboutContent lable="Status :" content={movies?.status} />
+            <AboutContent lable="Status :" content={selectedMovie?.status} />
           </div>
         </div>
         <div className="col-md-5 order-md-1">
           <img
             src={
-              movies?.poster_path
-                ? `${IMG_URL}${movies?.poster_path}`
+              selectedMovie?.poster_path
+                ? `${IMG_URL}${selectedMovie?.poster_path}`
                 : defaultImage
             }
             className="d-block mx-lg-auto img-fluid"

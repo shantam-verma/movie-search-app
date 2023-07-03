@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [hasError, setHasError] = useState({ status: false, msg: "" });
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const getMovies = async (
     fetchUrl,
@@ -68,6 +69,8 @@ export const AppProvider = ({ children }) => {
           setLoading,
           setProgress,
           seriesData,
+          selectedMovie,
+          setSelectedMovie
         }}
       >
         {children}

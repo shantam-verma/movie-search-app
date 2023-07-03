@@ -5,10 +5,8 @@ import Spinner from "./Spinner";
 import ErrorBoundary from "../ErrorBoundary";
 
 export default function Cards({ fetchUrl, headline }) {
-  const { loading, movies, getMovies, hasError, setHasError } =
-    useGlobalContext();
+  const { loading, movies, getMovies, hasError, setHasError, setSelectedMovie } = useGlobalContext();
 
-  console.info("fetch url: ", fetchUrl);
 
   useEffect(() => {
     let timerOut = setTimeout(() => {
@@ -25,6 +23,12 @@ export default function Cards({ fetchUrl, headline }) {
     return <h1>{hasError.mgs}</h1>;
     console.info(hasError.mgs);
   }
+
+  function handleMovieClick(movie){
+    setSelectedMovie(movie)
+  }
+
+  
   return (
     <>
       {loading ? (
@@ -36,7 +40,7 @@ export default function Cards({ fetchUrl, headline }) {
           </h2>
           <div className="d-flex flex-wrap justify-content-around">
             {movies.map((movie) => (
-              <div key={movie.id}>
+              <div key={movie.id} onClick={() => handleMovieClick(movie)}>
                 <Element movies={movie} />
               </div>
             ))}

@@ -103,7 +103,7 @@ export default function Router() {
       element: (
         <>
           <NavBar />
-          <AboutMovie fetchUrl={fetchSingleMovie} />
+          <AboutMovie />
         </>
       ),
     },
