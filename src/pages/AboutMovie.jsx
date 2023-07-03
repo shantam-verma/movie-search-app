@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "../hooks/useContext";
-// import { IMG_URL } from "../config/useApiURL";
-// import defaultImage from "../assets/default_poster.jpg";
+import { IMG_URL } from "../config/useApiURL";
+import defaultImage from "../assets/default_poster.jpg";
+import AboutContent from "../components/AboutContent";
 
 export default function AboutMovie({ fetchUrl }) {
   const { movies, getMovies } = useGlobalContext();
@@ -9,12 +10,18 @@ export default function AboutMovie({ fetchUrl }) {
   useEffect(() => {
     getMovies(fetchUrl);
   }, [fetchUrl]);
+
+  const revenueFormatted = Intl.NumberFormat("en-US");
   return (
     <div className="p-4 pt-0">
       <div className="my-card">
         <div className="card text-bg-dark about-backdrop ">
           <img
-            src="https://image.tmdb.org/t/p/original/7e9MVGg8efOhoA2R9XhZcGWTC5Z.jpg"
+            src={
+              movies?.poster_path
+                ? `${IMG_URL}${movies?.backdrop_path}`
+                : defaultImage
+            }
             className="card-img single_poster"
             alt="..."
           />
@@ -23,10 +30,11 @@ export default function AboutMovie({ fetchUrl }) {
               className="card-title header-title"
               style={{ fontWeight: "400" }}
             >
-              Card title
+              {movies?.original_title}
             </h5>
             <p className="card-text">
-              8<i className="fa-solid fa-star"></i>
+              {movies?.vote_average}
+              <i className="fa-solid fa-star"></i>
             </p>
             <button type="button" className="btn btn-info btn-mg">
               <i className="fa-solid fa-play pe-1"></i> play
@@ -42,29 +50,38 @@ export default function AboutMovie({ fetchUrl }) {
       <div className="row featurette">
         <div className="col-md-7 order-md-2">
           <h2 className="card-title text-light featurette-heading lh-1">
-            Oh yeah, it’s that good.
+            {movies?.original_title}
           </h2>
-          <p className="text-light my-3">Opposites react.</p>
-          <div className="card-body">
-            <h4 className="card-title text-start text-light">Description</h4>
-            <p className="text-light my-3">
-              In a city where fire, water, land and air residents live together,
-              a fiery young woman and a go-with-the-flow guy will discover
-              something elemental: how much they have in common.
-            </p>
-            <h4 className="card-title text-start text-light">Genre :</h4>
-            <p className="text-light my-3">Animation Comedy Family Fantasy</p>
-            <h4 className="card-title text-start text-light">
-              Revenue Earned : $
-            </h4>
-            <p className="text-light my-3">48000000</p>
-            <h4 className="card-title text-start text-light">Status : </h4>
-            <p className="text-light my-3">Released</p>
+          <p className="text-light my-3">{movies?.tagline}</p>
+          <div className="card-bomoviesdy">
+            <AboutContent lable="Description" content={movies?.overview} />
+            <AboutContent
+              lable="Genre"
+              content={
+                movies?.genres &&
+                movies.genres.map((genre) => (
+                  <span key={genre?.id}>{genre?.name} </span>
+                ))
+              }
+            />
+            <AboutContent
+              lable="Released Date"
+              content={`${movies?.release_date} ${movies?.production_countries[0]?.iso_3166_1}`}
+            />
+            <AboutContent
+              lable="Revenue Earned"
+              content={`$ ${revenueFormatted.format(movies?.revenue)}`}
+            />
+            <AboutContent lable="Status :" content={movies?.status} />
           </div>
         </div>
         <div className="col-md-5 order-md-1">
           <img
-            src="https://image.tmdb.org/t/p/original/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg"
+            src={
+              movies?.poster_path
+                ? `${IMG_URL}${movies?.poster_path}`
+                : defaultImage
+            }
             className="d-block mx-lg-auto img-fluid"
             alt="Bootstrap Themes"
             width="700"

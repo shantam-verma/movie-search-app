@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Element from "./Elements";
-import domainInstance from "../lib/useAxios";
 import { useGlobalContext } from "../hooks/useContext";
 import Spinner from "./Spinner";
 import ErrorBoundary from "../ErrorBoundary";
@@ -9,7 +8,7 @@ export default function Cards({ fetchUrl, headline }) {
   const { loading, movies, getMovies, hasError, setHasError } =
     useGlobalContext();
 
-    console.info("fetch url: ", fetchUrl)
+  console.info("fetch url: ", fetchUrl);
 
   useEffect(() => {
     let timerOut = setTimeout(() => {

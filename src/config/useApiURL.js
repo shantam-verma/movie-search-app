@@ -33,6 +33,5 @@ export default function useApiURL() {
     fetchSingleMovie,
     fetchTopMovies,
     fetchTv,
-    id,
   };
 }

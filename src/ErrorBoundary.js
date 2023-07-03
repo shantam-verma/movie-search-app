@@ -19,7 +19,9 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <h1>Error: {this.state.error.message}</h1>;
+      return (
+        <h1 className="text-center mt-5">Error: {this.state.error.message}</h1>
+      );
     }
     return this.props.children;
   }
