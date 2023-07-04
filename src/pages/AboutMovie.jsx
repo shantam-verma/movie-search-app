@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../hooks/useContext";
 import { IMG_URL } from "../config/useApiURL";
 import defaultImage from "../assets/default_poster.jpg";
@@ -52,32 +52,18 @@ export default function AboutMovie() {
       <h2 className="section-header my-5 border-info ps-1">About</h2>
       <div className="row featurette">
         <div className="col-md-7 order-md-2">
-          <h2 className="card-title text-light featurette-heading lh-1">
+          <h2 className="card-title text-light featurette-heading lh-1 mb-4">
             {selectedMovie?.original_title}
           </h2>
-          <p className="text-light my-3">{selectedMovie?.tagline}</p>
           <div className="card-bomoviesdy">
             <AboutContent
               label="Description"
               content={selectedMovie?.overview}
             />
             <AboutContent
-              label="Genre"
-              content={selectedMovie?.genres?.map((genre) => (
-                <span key={genre?.id}>{genre?.name} </span>
-              ))}
-            />
-            <AboutContent
               label="Released Date"
               content={`${selectedMovie?.release_date}`}
             />
-            <AboutContent
-              label="Revenue Earned"
-              content={`$ ${revenueFormatted.format(
-                selectedMovie?.revenue || 0
-              )}`}
-            />
-            <AboutContent label="Status:" content={selectedMovie?.status} />
           </div>
         </div>
         <div className="col-md-5 order-md-1">

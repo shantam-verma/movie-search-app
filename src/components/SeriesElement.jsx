@@ -17,7 +17,7 @@ export default function SeriesElement({ fetchUrl, headline }) {
       {loading ? (
         <Spinner />
       ) : (
-        <ErrorBoundary>
+        <>
           <h2 className="section-header ps-2 border-info my-5 mx-3">
             {headline}
           </h2>
@@ -62,7 +62,7 @@ export default function SeriesElement({ fetchUrl, headline }) {
               </div>
             ))}
           </div>
-        </ErrorBoundary>
+        </>
       )}
     </>
   );

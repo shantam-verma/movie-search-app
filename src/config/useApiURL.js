@@ -1,10 +1,8 @@
 import { useGlobalContext } from "../hooks/useContext";
-import { useParams } from "react-router-dom";
 
 export const IMG_URL = "https://image.tmdb.org/t/p/original";
 
 export default function useApiURL() {
-  const { id } = useParams();
   const { search } = useGlobalContext();
   const movieName = encodeURIComponent(search);
 
@@ -17,7 +15,6 @@ export default function useApiURL() {
   const fetchTrendings = `trending/movie/week${API_KEY}&include_adult=false&language=en-US`;
   const fetchUpcomings = `movie/upcoming${API_KEY}&include_adult=false&language=en-US`;
   const fetchSearches = `search/movie${API_KEY}&query=${movieName}&include_adult=false&language=en-US&page=1`;
-  const fetchSingleMovie = `movie/${id}${API_KEY}&include_adult=false&language=en-US&page=1`;
   const fetchTv = `discover/tv${API_KEY}&include_adult=false&language=en-US&page=1`;
 
   return {
@@ -28,7 +25,6 @@ export default function useApiURL() {
     fetchTrendings,
     fetchUpcomings,
     fetchSearches,
-    fetchSingleMovie,
     fetchTopMovies,
     fetchTv,
   };
