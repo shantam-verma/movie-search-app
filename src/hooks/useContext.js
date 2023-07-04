@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import LoadingBar from "react-top-loading-bar";
 import domainInstance from "../lib/useAxios";
 
@@ -70,7 +70,7 @@ export const AppProvider = ({ children }) => {
           setProgress,
           seriesData,
           selectedMovie,
-          setSelectedMovie
+          setSelectedMovie,
         }}
       >
         {children}

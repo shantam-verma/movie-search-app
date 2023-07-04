@@ -5,8 +5,16 @@ import Spinner from "./Spinner";
 import ErrorBoundary from "../ErrorBoundary";
 
 export default function Cards({ fetchUrl, headline }) {
-  const { loading, movies, getMovies, hasError, setHasError, setSelectedMovie } = useGlobalContext();
+  const {
+    loading,
+    movies,
+    getMovies,
+    hasError,
+    setHasError,
+    setSelectedMovie,
+  } = useGlobalContext();
 
+  const win = window.sessionStorage;
 
   useEffect(() => {
     let timerOut = setTimeout(() => {
@@ -24,11 +32,11 @@ export default function Cards({ fetchUrl, headline }) {
     console.info(hasError.mgs);
   }
 
-  function handleMovieClick(movie){
-    setSelectedMovie(movie)
+  function handleMovieClick(movie) {
+    win.setItem("aboutPage", JSON.stringify(movie));
+    setSelectedMovie(movie);
   }
 
-  
   return (
     <>
       {loading ? (

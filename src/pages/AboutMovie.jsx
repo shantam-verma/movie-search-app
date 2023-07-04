@@ -5,8 +5,14 @@ import defaultImage from "../assets/default_poster.jpg";
 import AboutContent from "../components/AboutContent";
 
 export default function AboutMovie() {
-  const { selectedMovie } = useGlobalContext();
-
+  const { selectedMovie, setSelectedMovie } = useGlobalContext();
+  const win = window.sessionStorage;
+  useEffect(() => {
+    const getSingleData = win.getItem("aboutPage");
+    const parsedData = JSON.parse(getSingleData);
+    setSelectedMovie(parsedData);
+    console.log(parsedData);
+  }, []);
 
   const revenueFormatted = Intl.NumberFormat("en-US");
   return (
@@ -51,25 +57,27 @@ export default function AboutMovie() {
           </h2>
           <p className="text-light my-3">{selectedMovie?.tagline}</p>
           <div className="card-bomoviesdy">
-            <AboutContent lable="Description" content={selectedMovie?.overview} />
             <AboutContent
-              lable="Genre"
-              content={
-                selectedMovie?.genres &&
-                selectedMovie.genres.map((genre) => (
-                  <span key={genre?.id}>{genre?.name} </span>
-                ))
-              }
+              label="Description"
+              content={selectedMovie?.overview}
             />
             <AboutContent
-              lable="Released Date"
-              // content={`${selectedMovie?.release_date} ${selectedMovie?.production_countries[0]?.iso_3166_1}`}
+              label="Genre"
+              content={selectedMovie?.genres?.map((genre) => (
+                <span key={genre?.id}>{genre?.name} </span>
+              ))}
             />
             <AboutContent
-              lable="Revenue Earned"
-              content={`$ ${revenueFormatted.format(selectedMovie?.revenue)}`}
+              label="Released Date"
+              content={`${selectedMovie?.release_date}`}
             />
-            <AboutContent lable="Status :" content={selectedMovie?.status} />
+            <AboutContent
+              label="Revenue Earned"
+              content={`$ ${revenueFormatted.format(
+                selectedMovie?.revenue || 0
+              )}`}
+            />
+            <AboutContent label="Status:" content={selectedMovie?.status} />
           </div>
         </div>
         <div className="col-md-5 order-md-1">
