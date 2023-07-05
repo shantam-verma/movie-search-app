@@ -111,7 +111,7 @@ export default function SignUp() {
                 href="/login"
               >
                 {" "}
-                Sign up now
+                Sign in here
               </a>
             </p>
             <div className="or-container">
